@@ -1,0 +1,6 @@
+{
+  "SCREENS": {
+    "LIST": "list",
+    "DETAILS": "details"
+  }
+}
