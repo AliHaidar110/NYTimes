@@ -1,37 +1,21 @@
 import React from 'react';
 import FastImage from 'react-native-fast-image';
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  StyleSheet,
-  GestureResponderEvent,
-} from 'react-native';
+import {SharedElement} from 'react-navigation-shared-element';
+import {TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 
 import {RightArrowIcon, CalendarIcon} from '../resources';
 
-import type {PropsWithoutRef} from 'react';
-import {SharedElement} from 'react-navigation-shared-element';
-
-type CardProps = PropsWithoutRef<{
-  title: string;
-  author: string;
-  location: string;
-  date: string;
-  thumbnailUri: string;
-  imgSharedId: string;
-  onPress: (event: GestureResponderEvent) => void;
-}>;
-
 function Card({
   title,
-  author,
   location,
-  date,
   thumbnailUri,
   imgSharedId,
+  author,
+  authorSharedId,
+  date,
+  dateSharedId,
   onPress,
-}: CardProps) {
+}) {
   return (
     <TouchableOpacity onPress={onPress} style={style.rootContainer}>
       <SharedElement id={imgSharedId}>
@@ -49,17 +33,23 @@ function Card({
         </Text>
 
         <View style={style.writerContainer}>
-          <Text numberOfLines={2} style={style.paragraph}>
-            {author}
-          </Text>
+          <SharedElement id={authorSharedId}>
+            <Text numberOfLines={2} style={style.text}>
+              {author}
+            </Text>
+          </SharedElement>
 
           <View style={style.locationContainer}>
-            <Text style={style.paragraph}>{location}</Text>
+            <Text numberOfLines={1} style={[style.text, style.location]}>
+              {location}
+            </Text>
 
-            <View style={style.dateContainer}>
-              <CalendarIcon />
-              <Text style={style.paragraph}>{date}</Text>
-            </View>
+            <SharedElement style={style.dateContainer} id={dateSharedId}>
+              <View style={style.dateContainer}>
+                <CalendarIcon />
+                <Text style={style.text}>{date}</Text>
+              </View>
+            </SharedElement>
           </View>
         </View>
       </View>
@@ -79,9 +69,7 @@ const style = StyleSheet.create({
     justifyContent: 'space-between',
     borderBottomColor: 'darkgrey',
     borderBottomWidth: 1,
-    paddingHorizontal: 6,
     paddingVertical: 12,
-    // backgroundColor: 'red',
   },
   titleContainer: {
     flex: 1,
@@ -90,23 +78,19 @@ const style = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 6,
     paddingEnd: 40,
-    // backgroundColor: 'green',
   },
   writerContainer: {
     width: '100%',
-    // backgroundColor: 'yellow',
   },
   locationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // backgroundColor: 'blue',
   },
   dateContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // backgroundColor: 'black',
   },
   img: {
     height: 40,
@@ -116,10 +100,14 @@ const style = StyleSheet.create({
   title: {
     fontWeight: '600',
     fontSize: 16,
+    color: '#1f1f1f',
   },
-  paragraph: {
+  location: {
+    width: '80%',
+  },
+  text: {
     fontWeight: '400',
     fontSize: 14,
-    color: 'gray',
+    color: '#828282',
   },
 });
