@@ -1,0 +1,8 @@
+{
+  "APIS": {
+    "NYT": {
+      "BASE": "https://api.nytimes.com",
+      "KEY": "YvJFcYPAGbM3tGEU42d0PsGD9MSVNwYn"
+    }
+  }
+}
