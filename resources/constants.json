@@ -2,5 +2,13 @@
   "SCREENS": {
     "LIST": "list",
     "DETAILS": "details"
+  },
+  "SLICE": {
+    "STATUS": {
+      "IDLE": 0,
+      "LOADING": 1,
+      "SUCCESS": 2,
+      "FAILED": -1
+    }
   }
 }
