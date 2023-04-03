@@ -1,7 +1,9 @@
-import {useCallback, useState} from 'react';
+import { useCallback, useState } from 'react';
 import FastImage from 'react-native-fast-image';
+import { useNavigation } from '@react-navigation/native';
 
-import {asyncTimeout} from '../lib/misc';
+import { CONSTANTS } from '../resources';
+import { asyncTimeout } from '../lib/misc';
 import {articlesServices} from '../services';
 
 function useArticles() {
@@ -9,6 +11,8 @@ function useArticles() {
   const [error, setError] = useState('');
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  const { navigate } = useNavigation();
 
   const getArticles = useCallback(async () => {
     setError('');
@@ -59,8 +63,22 @@ function useArticles() {
     }
   }, []);
 
+  const showArticle = useCallback((item) => () => {
+    navigate(CONSTANTS.SCREENS.DETAILS, {
+      title: item.title,
+      imgUri: item.imgUri,
+      paragraph: item.paragraph,
+      author: item.author,
+      date: item.date,
+      imgSharedId: item.imgSharedId,
+      authorSharedId: item.authorSharedId,
+      dateSharedId: item.dateSharedId,
+    });
+  }, []);
+
   return {
     getArticles,
+    showArticle,
     articles: data,
     error,
     isLoading,

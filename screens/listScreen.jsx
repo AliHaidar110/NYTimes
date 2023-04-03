@@ -1,29 +1,14 @@
 import React, { useCallback, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
 import { FlatList, StyleSheet, Text } from 'react-native';
 
 import { Card } from '../components';
 import { useArticles } from '../hooks';
-import { CONSTANTS } from '../resources';
 
 function ListScreen() {
-  const { articles, isLoading, isError, error, getArticles } = useArticles();
-
-  const {navigate} = useNavigation();
+  const { articles, isLoading, isError, error, getArticles, showArticle } = useArticles();
 
   const renderCard = useCallback(({item}) => {
-    function onPress() {
-      navigate(CONSTANTS.SCREENS.DETAILS, {
-        title: item.title,
-        imgUri: item.imgUri,
-        paragraph: item.paragraph,
-        author: item.author,
-        date: item.date,
-        imgSharedId: item.imgSharedId,
-        authorSharedId: item.authorSharedId,
-        dateSharedId: item.dateSharedId,
-      });
-    }
+    const onPress = showArticle(item);
 
     return (
       <Card
