@@ -1,4 +1,14 @@
 
+### Description
+
+This is a demo app to show case some of my knowledge and skills
+
+
+
+https://user-images.githubusercontent.com/64657659/229521336-620b8f21-0e21-4e1c-ab75-e1d543613874.mov
+
+
+
 ### How to run the code
 
 1. navigate to the root folder and open terminal at location
